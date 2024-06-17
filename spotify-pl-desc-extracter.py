@@ -2,9 +2,6 @@ import requests, json, time, spotify_token, key
 from datetime import datetime
 from discord_webhook import DiscordWebhook
 
-playlist_ID = '13CWcYGxScvASwzKnQkqs4'
-discord_webhook_url = 'https://discord.com/api/webhooks/1251763608472387604/9LgbUV6gDBFZAO_pxdbpOVKyI7hy_Gvqo6mWjk8JZI44i9QJLKqoRICBbXHtE3MqjPkP'
-
 def get_token():
     # Define the URL and the headers
     url = "https://accounts.spotify.com/api/token"
@@ -56,7 +53,7 @@ def fetch_web_api(endpoint, method, body=None):
     return response.json()
 
 def get_playlist_description():
-    endpoint = f'v1/playlists/{playlist_ID}'
+    endpoint = f'v1/playlists/{key.playlist_ID}'
     return fetch_web_api(endpoint, 'GET')
 
 
@@ -90,7 +87,7 @@ def main():
 
             # Send data to Discord webhook
             webhook = DiscordWebhook(
-                url=discord_webhook_url,
+                url=key.discord_webhook_url,
                 content=f"{current_time} : {current_description}"
             )
             response = webhook.execute()
