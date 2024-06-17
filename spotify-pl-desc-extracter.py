@@ -2,9 +2,6 @@ import requests, json, time, spotify_token, key
 from datetime import datetime
 from discord_webhook import DiscordWebhook
 
-playlist_ID = 'YOUR_PLAYLIST_ID'
-discord_webhook_url = 'YOUR_DISCORD_WEBHOOK_URL'
-
 def get_token():
     # Define the URL and the headers
     url = "https://accounts.spotify.com/api/token"
