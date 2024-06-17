@@ -3,7 +3,7 @@ from datetime import datetime
 from discord_webhook import DiscordWebhook
 
 playlist_ID = '13CWcYGxScvASwzKnQkqs4'
-discord_webhook_url = 'https://discord.com/api/webhooks/1251763608472387604/9LgbUV6gDBFZAO_pxdbpOVKyI7hy_Gvqo6mWjk8JZI44i9QJLKqoRICBbXHtE3MqjPkP'
+discord_webhook_url = 'YOUR_DISCORD_WEBHOOK_URL'
 
 def get_token():
     # Define the URL and the headers
