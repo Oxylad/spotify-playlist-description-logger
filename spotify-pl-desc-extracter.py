@@ -25,7 +25,7 @@ def get_token():
         response_data = response.json()
         # Get the access token
         access_token = response_data.get("access_token")
-        print("Access Token:", access_token)
+        print(datetime.now().strftime("%Y-%m-%d %H:%M:%S:"),"Access Token: ",access_token)
 
         # Save the token to token.py
         with open("spotify_token.py", "w") as token_file:
@@ -71,6 +71,7 @@ def main():
     while True:
         get_token()
         get_playlist_data = get_playlist_description()
+        # print(get_playlist_data)
 
         with open('datafile.json', 'w') as outfile:
             json.dump(get_playlist_data, outfile, indent=4)
@@ -81,20 +82,18 @@ def main():
 
         check_token()
 
-        current_description = ans['description']
-        if current_description != previous_description:
-            current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        if list(get_playlist_data)[0] == 'collaborative':
+            current_description = ans['description']
+            if current_description != previous_description:
+                current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S:")
 
-            # Send data to Discord webhook
-            webhook = DiscordWebhook(
-                url=key.discord_webhook_url,
-                content=f"{current_time} : {current_description}"
-            )
-            response = webhook.execute()
-        previous_description = current_description
+                # Send data to Discord webhook
+                webhook = DiscordWebhook(
+                    url=key.discord_webhook_url,
+                    content=f"{current_time} : {current_description}"
+                )
+                response = webhook.execute()
+            previous_description = current_description
         time.sleep(59)
 
-
 main()
-
-
